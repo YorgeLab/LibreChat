@@ -9,7 +9,7 @@ import { useGetEndpointsQuery, useGetStartupConfig } from '~/data-provider';
 import { getIconEndpoint, getEntity, getModelSpec } from '~/utils';
 import { useLocalize, useAuthContext, useGreeting } from '~/hooks';
 import { useChatSettings } from '~/Providers/ChatSettingsContext';
-import AgentContact from '~/components/Agents/AgentContact';
+import AgentContact, { resolveAgentContact } from '~/components/Agents/AgentContact';
 import ConvoIcon from '~/components/Endpoints/ConvoIcon';
 
 const containerClassName =
@@ -215,7 +215,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
               : `animate-fadeIn mt-4 max-w-md text-center text-sm font-normal ${isTemporary ? 'text-text-secondary' : 'text-text-primary'}`
           }
         />
-        {selectedAgent && !isTemporary && (
+        {selectedAgent && !isTemporary && resolveAgentContact(selectedAgent) && (
           <AgentContact
             agent={selectedAgent}
             className="animate-fadeIn mt-2 max-w-md justify-center text-center text-sm"
